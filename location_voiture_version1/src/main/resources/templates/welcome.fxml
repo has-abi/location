@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="888.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.WelcomeController">
+   <children>
+      <AnchorPane prefHeight="545.0" prefWidth="236.0" style="-fx-background-color: #41235E;">
+         <children>
+            <ImageView fitHeight="66.0" fitWidth="99.0" layoutX="84.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons8-car-filled-100.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="59.0" layoutY="80.0" text="Abida" textFill="#c3c3c3">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="127.0" layoutY="80.0" text="Cars" textFill="#008aff">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="63.0" layoutY="275.0" prefHeight="24.0" prefWidth="108.0" text="Dashboard" textAlignment="CENTER" textFill="#c3c3c3">
+               <font>
+                  <Font name="Arial" size="20.0" />
+               </font>
+            </Label>
+            <Separator layoutY="131.0" prefHeight="3.0" prefWidth="66.0" style="-fx-background-color: #c3c3c3;" />
+            <Button layoutX="-6.0" layoutY="314.0" mnemonicParsing="false" onAction="#handleHome" prefHeight="39.0" prefWidth="236.0" style="-fx-background-color: #371e50;" text="Home" textFill="#cccbcd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="-1.0" layoutY="363.0" mnemonicParsing="false" onAction="#handleMyCars" prefHeight="39.0" prefWidth="236.0" style="-fx-background-color: #371e50;" text="Mes Voitures" textFill="#cccbcd">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="about" layoutX="-1.0" layoutY="412.0" mnemonicParsing="false" onAction="#handleAbout" prefHeight="39.0" prefWidth="236.0" style="-fx-background-color: #371e50;" text=" APropos" textFill="#cccbcd">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="177.0" layoutY="370.0" text="0" textFill="#008aff">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Separator layoutX="17.0" layoutY="469.0" prefWidth="200.0" />
+            <Button fx:id="contact" layoutX="38.0" layoutY="492.0" mnemonicParsing="false" onAction="#handleContact" prefHeight="39.0" prefWidth="160.0" style="-fx-background-color: #371e50;" text="Contact nous" textFill="#cccbcd" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="38.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="user_location" alignment="CENTER" layoutX="28.0" layoutY="273.0" prefHeight="27.0" prefWidth="178.0" textFill="#008aff">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="163.0" text="Ce platforme est special pour " textFill="#c3c3c3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="11.0" layoutY="184.0" text="la location de voiture de qualité " textFill="#c3c3c3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="27.0" layoutY="205.0" text="avec des prix considérables" textFill="#c3c3c3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="236.0" prefHeight="545.0" prefWidth="657.0" style="-fx-background-color: black;">
+         <children>
+            <Pane fx:id="myCars" prefHeight="545.0" prefWidth="657.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="108.0" text="mycars" textAlignment="CENTER" textFill="#c3c3c3">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="_about" prefHeight="545.0" prefWidth="657.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="108.0" text="about" textAlignment="CENTER" textFill="#c3c3c3">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="_contact" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: yellow;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label prefHeight="24.0" prefWidth="108.0" text="contact" textAlignment="CENTER" textFill="#c3c3c3">
+                     <font>
+                        <Font name="Arial" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="home" prefHeight="545.0" prefWidth="651.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="39.0" layoutX="605.0" layoutY="7.0" onMouseClicked="#handleClose" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons8-cancel-50.png" />
+                     </image>
+                  </ImageView>
+                  <Separator layoutX="163.0" layoutY="14.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <Separator layoutX="326.0" layoutY="14.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="0.0" />
+                  <Separator layoutX="491.0" layoutY="14.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <Separator layoutX="162.0" layoutY="189.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <Separator layoutX="325.0" layoutY="189.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="0.0" />
+                  <Separator layoutX="490.0" layoutY="189.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <Separator layoutX="161.0" layoutY="371.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <Separator layoutX="324.0" layoutY="371.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="0.0" />
+                  <Separator layoutX="489.0" layoutY="371.0" orientation="VERTICAL" prefHeight="168.0" prefWidth="6.0" />
+                  <ImageView fx:id="wel_image_1" fitHeight="95.0" fitWidth="141.0" layoutX="12.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_1" alignment="TOP_CENTER" layoutX="23.0" layoutY="109.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more_0" layoutX="16.0" layoutY="157.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add_0" layoutX="16.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_2" fitHeight="95.0" fitWidth="141.0" layoutX="169.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_11" alignment="TOP_CENTER" layoutX="180.0" layoutY="109.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more1" layoutX="173.0" layoutY="157.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add1" layoutX="173.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_3" fitHeight="95.0" fitWidth="141.0" layoutX="338.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_12" alignment="TOP_CENTER" layoutX="349.0" layoutY="109.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more2" layoutX="342.0" layoutY="157.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add2" layoutX="342.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_4" fitHeight="95.0" fitWidth="141.0" layoutX="10.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_13" alignment="TOP_CENTER" layoutX="21.0" layoutY="284.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more3" layoutX="14.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add3" layoutX="14.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_5" fitHeight="95.0" fitWidth="141.0" layoutX="171.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_14" alignment="TOP_CENTER" layoutX="182.0" layoutY="284.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more4" layoutX="175.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add4" layoutX="175.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_6" fitHeight="95.0" fitWidth="141.0" layoutX="336.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_15" alignment="TOP_CENTER" layoutX="347.0" layoutY="284.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more5" layoutX="340.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add5" layoutX="340.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_7" fitHeight="95.0" fitWidth="141.0" layoutX="8.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_16" alignment="TOP_CENTER" layoutX="19.0" layoutY="458.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more6" layoutX="12.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add6" layoutX="12.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_8" fitHeight="95.0" fitWidth="141.0" layoutX="171.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_17" alignment="TOP_CENTER" layoutX="182.0" layoutY="458.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more7" layoutX="175.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add7" layoutX="175.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fx:id="wel_image_9" fitHeight="95.0" fitWidth="141.0" layoutX="334.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="wel_name_18" alignment="TOP_CENTER" layoutX="345.0" layoutY="458.0" prefHeight="17.0" prefWidth="127.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="wel_more8" layoutX="338.0" layoutY="506.0" mnemonicParsing="false" onAction="#handleMore" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0158FC;" text="Plus" textFill="WHITE" />
+                  <Button fx:id="wel_add8" layoutX="338.0" layoutY="475.0" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #6B08A0; -fx-tex-fill: white;" text="Ajouter" textFill="WHITE" />
+                  <ImageView fitHeight="365.0" fitWidth="141.0" layoutX="502.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@index.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="127.0" fitWidth="141.0" layoutX="509.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Car_Magnet_350.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="next" layoutX="508.0" layoutY="504.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="27.0" prefWidth="141.0" style="-fx-background-color: transparent;" text="Next" textFill="#545353" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

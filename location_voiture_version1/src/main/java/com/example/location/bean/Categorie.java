@@ -3,6 +3,8 @@ package com.example.location.bean;
 
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +22,11 @@ public class Categorie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 30)
     private String name;
+    @Column(length = 2)
     private int nbrePortes;
+    @Column(length = 2)
     private int nbrePlaces;
  
     public Long getId() {

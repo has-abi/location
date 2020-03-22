@@ -25,10 +25,10 @@ public enum FxmlView {
             return "/templates/addressView.fxml";
         }
     },
-	 AJOUTVOITURE{
+	 ADMIN{
 	        @Override
 			public String getTitle() {
-	            return getStringFromResourceBundle("ajoutVoiture.title");
+	            return getStringFromResourceBundle("admin.title");
 	        }
 
 	        @Override
@@ -46,7 +46,40 @@ public enum FxmlView {
 			public String getFxmlFile() {
 	            return "/templates/login.fxml";
 	        }
-	    };
+	    },
+	WELCOME{
+        @Override
+		public String getTitle() {
+            return getStringFromResourceBundle("welcome.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/templates/welcome.fxml";
+        }
+    },
+	MORE{
+        @Override
+		public String getTitle() {
+            return getStringFromResourceBundle("more.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/templates/more.fxml";
+        }
+    },
+	REGISTER{
+        @Override
+		public String getTitle() {
+            return getStringFromResourceBundle("register.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/templates/register.fxml";
+        }
+    };
     
     public abstract String getTitle();
     public abstract String getFxmlFile();
@@ -54,6 +87,7 @@ public enum FxmlView {
     String getStringFromResourceBundle(String key){
         return ResourceBundle.getBundle("Bundle").getString(key);
     }
+    
 
 }
 

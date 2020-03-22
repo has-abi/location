@@ -9,65 +9,65 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="670.0" style="-fx-background-color: #41235E;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.location.frontEnd.LocationController">
+<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="670.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.location.controller.LoginController">
    <children>
-      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="444.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="439.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons8-administrator-male-52.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="446.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="439.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons8-lock-filled-50.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="66.0" fitWidth="99.0" layoutX="237.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="183.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@icons8-car-filled-100.png" />
+            <Image url="@5278232-car-logo-png-free-transparent-png-logos-car-logo-png-448_157_preview.png" />
          </image>
       </ImageView>
-      <Label layoutX="316.0" layoutY="91.0" text="Abida" textFill="#c3c3c3">
+      <Label layoutX="316.0" layoutY="91.0" textFill="#c3c3c3">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Label layoutX="384.0" layoutY="91.0" text="Cars" textFill="#008aff">
+      <Label layoutX="384.0" layoutY="91.0" textFill="#008aff">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="580.0" layoutY="347.0" mnemonicParsing="false"  style="-fx-background-color: transparent; -fx-border-color: #08BFFE; -fx-border-radius: 5px;" text="Register" textFill="#08bffe">
+      <Button layoutX="575.0" layoutY="347.0" mnemonicParsing="false" onAction="#loadRegisterView" style="-fx-background-color: transparent; -fx-border-color: #ffe100; -fx-border-radius: 5px;" text="S'inscrire" textFill="#ffe100">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="290.0" layoutY="278.0" mnemonicParsing="false"  prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #08BFFE;" text="Login" textFill="WHITE">
+      <Button layoutX="280.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #ffe100;" text="S'identifier" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="243.0" layoutY="341.0" mnemonicParsing="false"  prefHeight="31.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Forgot password ?" textFill="#c6c3c3" underline="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <TextField fx:id="email" layoutX="258.0" layoutY="179.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
-      <Label layoutX="171.0" layoutY="180.0" prefHeight="27.0" prefWidth="66.0" text="Email" textFill="#c6c4c4">
+      <TextField fx:id="email" layoutX="253.0" layoutY="157.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
+      <Label layoutX="191.0" layoutY="157.0" prefHeight="27.0" prefWidth="44.0" text="Email" textFill="#c6c4c4">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="171.0" layoutY="232.0" prefHeight="27.0" prefWidth="84.0" text="Password" textFill="#c6c4c4">
+      <Label layoutX="132.0" layoutY="210.0" prefHeight="27.0" prefWidth="118.0" text="Mot de passe" textFill="#c6c4c4">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pwd" layoutX="258.0" layoutY="233.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
-      <ImageView fitHeight="45.0" fitWidth="42.0" layoutX="618.0" layoutY="14.0"  pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="338.0" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
+      <PasswordField fx:id="pwd" layoutX="253.0" layoutY="211.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
+      <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="632.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="632.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
          <image>
-            <Image url="@icons8-cancel-50.png" />
+            <Image url="@unnamed.png" />
          </image>
       </ImageView>
       <Label fx:id="warning" alignment="CENTER" layoutX="253.0" layoutY="324.0" prefHeight="17.0" prefWidth="195.0" textFill="RED" />
+      <ImageView fitHeight="63.0" fitWidth="66.0" layoutX="304.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@user.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

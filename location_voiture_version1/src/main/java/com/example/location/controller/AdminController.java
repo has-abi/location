@@ -1,4 +1,4 @@
-package com.example.location.frontEnd;
+package com.example.location.controller;
 
 import java.io.File;
 import java.net.URL;

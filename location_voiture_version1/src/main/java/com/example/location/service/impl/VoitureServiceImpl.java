@@ -3,6 +3,9 @@ package com.example.location.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.location.bean.Voiture;
@@ -33,8 +36,27 @@ public class VoitureServiceImpl implements VoitureService {
 	}
 
 	@Override
+	public List<Voiture> findAllWithPagination(String action) {
+		Pageable pageable;
+		pageable = PageRequest.of(0, 8);
+		if(action.equals("first")) {
+			return this.voitureRepository.findAll(pageable).getContent();
+		}else if(action.equals("next")) {
+			return this.voitureRepository.findAll(pageable.next()).getContent();
+		}else if(action.equals("prev")) {
+			return this.voitureRepository.findAll(pageable.previousOrFirst()).getContent();
+		}else {
+			return null;
+		}
+		
+	
+	}
+
+	
+
+	@Override
 	public List<Voiture> findAll() {
-		return voitureRepository.findAll();
+		return this.voitureRepository.findAll();
 	}
 
 }

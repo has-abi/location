@@ -3,6 +3,8 @@ package com.example.location.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,10 +24,11 @@ public class Facture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 30)
     private String reference;
 	private double totale;
         @ManyToOne
-	private Client client;
+	private User client;
         @ManyToOne
 	private Reservation reservation;
         @Temporal(TemporalType.TIMESTAMP)
@@ -54,11 +57,11 @@ public class Facture implements Serializable {
         this.totale = totale;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
@@ -78,7 +81,7 @@ public class Facture implements Serializable {
         this.facDate = facDate;
     }
 
-    public Facture(Long id, String reference, double totale, Client client, Reservation reservation, Date facDate) {
+    public Facture(Long id, String reference, double totale, User client, Reservation reservation, Date facDate) {
         this.id = id;
         this.reference = reference;
         this.totale = totale;

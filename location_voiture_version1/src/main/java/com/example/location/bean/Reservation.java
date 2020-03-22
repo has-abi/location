@@ -4,6 +4,8 @@ package com.example.location.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +27,10 @@ public class Reservation implements Serializable {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateReserv;
+    @Column(length = 30)
     private String reference;
     @ManyToOne
-    private Client client;
+    private User client;
     @ManyToOne
     private Voiture voiture;
 
@@ -55,11 +58,11 @@ public class Reservation implements Serializable {
         this.reference = reference;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
@@ -71,7 +74,7 @@ public class Reservation implements Serializable {
         this.voiture = voiture;
     }
 
-    public Reservation(Long id, Date dateReserv, String reference, Client client, Voiture voiture) {
+    public Reservation(Long id, Date dateReserv, String reference, User client, Voiture voiture) {
         this.id = id;
         this.dateReserv = dateReserv;
         this.reference = reference;

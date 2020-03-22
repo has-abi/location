@@ -25,11 +25,16 @@ public class Voiture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 30)
     private String libelle;
     private String image;
+    @Column(length = 20)
     private String matricule;
+    @Column(length = 4)
     private int quatite;
+    @Column(length = 15)
     private String color;
+    @Column(length = 4)
     private double coutParJour;
     @Column(columnDefinition = "TEXT")
     private String discreption;

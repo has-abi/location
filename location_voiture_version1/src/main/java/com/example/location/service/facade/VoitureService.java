@@ -8,5 +8,6 @@ public interface VoitureService {
 	int save(Voiture voiture);
 	int modify(Voiture voiture);
 	int remove(Voiture voiture);
+	List<Voiture> findAllWithPagination(String action);
 	List<Voiture> findAll();
 }

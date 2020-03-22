@@ -43,7 +43,7 @@ public class Main extends Application {
      * window.
      */
     protected void displayInitialScene() {
-        stageManager.switchScene(FxmlView.AJOUTVOITURE);
+        stageManager.switchScene(FxmlView.WELCOME);
     }
 
     private ConfigurableApplicationContext springBootApplicationContext() {

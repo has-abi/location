@@ -16,20 +16,35 @@ public class MarqueServiceImpl implements MarqueService{
 	private MarqueRepository marqueRepository;
 	@Override
 	public int save(Marque marque) {
-		// TODO Auto-generated method stub
-		return 0;
+		Marque m = findByBrand(marque.getBrand());
+		if(m != null) {
+			return -1;
+		}else {
+			marqueRepository.save(marque);
+			return 1;
+		}
 	}
 
 	@Override
 	public int modify(Marque marque) {
-		// TODO Auto-generated method stub
-		return 0;
+		Marque m = marqueRepository.findById(marque.getId()).get();
+		if(m == null) {
+			return -1;
+		}else {
+			marqueRepository.save(marque);
+			return 1;
+		}
 	}
 
 	@Override
 	public int remove(Marque marque) {
-		// TODO Auto-generated method stub
-		return 0;
+		Marque m = findByBrand(marque.getBrand());
+		if(m == null) {
+			return -1;
+		}else {
+			marqueRepository.delete(m);
+			return 1;
+		}
 	}
 
 	@Override

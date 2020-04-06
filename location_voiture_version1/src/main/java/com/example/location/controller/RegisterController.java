@@ -9,9 +9,11 @@ import com.example.location.bean.User;
 import com.example.location.config.StageManager;
 import com.example.location.service.facade.UserService;
 import com.example.location.util.HandMessages;
+import com.example.location.util.Notification;
 import com.example.location.util.Session;
 import com.example.location.views.FxmlView;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 @Controller
 public class RegisterController {
@@ -50,7 +53,11 @@ public class RegisterController {
     @FXML
     private ToggleGroup gender;
   
-
+    @FXML
+    void handleClose(MouseEvent event) {
+    	Platform.exit();
+		System.exit(0);
+    }
     @FXML
     void handleLogin(ActionEvent event) {
     	this.stageManager.switchScene(FxmlView.LOGIN);
@@ -80,6 +87,7 @@ public class RegisterController {
     			messgInfo.dangerMessage("Email utilisé essayer un autre !");
     		}else {
     			Session.setSessionUser(user, "user");
+    			Notification.successNotification("vous avez s'inscrire avec succée!");
     			this.stageManager.switchScene(FxmlView.WELCOME);
     		}
     	}

@@ -9,15 +9,17 @@ import com.example.location.bean.User;
 import com.example.location.config.StageManager;
 import com.example.location.service.facade.UserService;
 import com.example.location.util.HandMessages;
+import com.example.location.util.Notification;
 import com.example.location.util.Session;
 import com.example.location.views.FxmlView;
 
-import ch.qos.logback.core.db.dialect.MsSQLDialect;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 @Controller
 public class LoginController {
@@ -36,7 +38,11 @@ public class LoginController {
 
 	@FXML
 	private Label warning;
-
+	 @FXML
+	    void handleClose(MouseEvent event) {
+			Platform.exit();
+			System.exit(0);
+	    }
 	@FXML
 	void loadRegisterView(ActionEvent event) {
 		this.stageManager.switchScene(FxmlView.REGISTER);
@@ -51,18 +57,21 @@ public class LoginController {
 		} else {
 			user.setEmail(this.email.getText());
 			user.setPassword(this.pwd.getText());
-			if (userService.login(user) == -1) {
+			int res =userService.login(user);
+			System.out.println("res :"+res);
+			if (res == -1) {
 				messgInfo.warningMessage("vous n'avez pas de compte veuillez le créer ! ");
-			} else if (userService.login(user) == -2) {
+			} else if (res == -2) {
 				messgInfo.warningMessage("Mot de passe Incorrect!");
 			} else {
-				if (userService.login(user) == 2) {
+				if (res == 2) {
 					User userLogged = userService.findByEmail(user.getEmail());
 					Session.setSessionUser(userLogged, "admin");
 					stageManager.switchScene(FxmlView.ADMIN);
 				} else {
 					User userLogged = userService.findByEmail(user.getEmail());
 					Session.setSessionUser(userLogged, "user");
+					Notification.successNotification("Bienvenu "+userLogged.getNom());
 					stageManager.switchScene(FxmlView.WELCOME);
 				}
 			}

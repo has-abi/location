@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 		if (foundedUser == null)
 			return -1;
 		else {
+			user.setId(foundedUser.getId());
 			userRepository.save(user);
 			return 1;
 		}
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int login(User user) {
+		System.out.println(user);
 		User foundedUser = findByEmail(user.getEmail());
 		if (foundedUser == null) {
 			return -1;

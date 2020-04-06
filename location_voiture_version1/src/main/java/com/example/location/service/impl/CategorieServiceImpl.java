@@ -16,20 +16,35 @@ public class CategorieServiceImpl implements CategorieService {
 
 	@Override
 	public int save(Categorie categorie) {
-		// TODO Auto-generated method stub
-		return 0;
+		Categorie c = findByName(categorie.getName());
+		if( c != null) {
+			return -1;
+		}else {
+			categorieRepository.save(categorie);
+			return 1;
+		}
 	}
 
 	@Override
 	public int modify(Categorie categorie) {
-		// TODO Auto-generated method stub
-		return 0;
+		Categorie c = categorieRepository.findById(categorie.getId()).get();
+		if( c == null) {
+			return -1;
+		}else {
+			categorieRepository.save(categorie);
+			return 1;
+		}
 	}
 
 	@Override
 	public int remove(Categorie categorie) {
-		// TODO Auto-generated method stub
-		return 0;
+		Categorie c = findByName(categorie.getName());
+		if( c == null) {
+			return -1;
+		}else {
+			categorieRepository.delete(c);
+			return 1;
+		}
 	}
 
 	@Override

@@ -79,6 +79,17 @@ public enum FxmlView {
 		public String getFxmlFile() {
             return "/templates/register.fxml";
         }
+    },
+	MODIFIERVOITURE{
+    	@Override
+		public String getTitle() {
+            return getStringFromResourceBundle("modifierVoiture.title");
+        }
+
+        @Override
+		public String getFxmlFile() {
+            return "/templates/modifierVoiture.fxml";
+        }
     };
     
     public abstract String getTitle();

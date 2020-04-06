@@ -25,7 +25,7 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dateReserv;
     @Column(length = 30)
     private String reference;
@@ -72,6 +72,21 @@ public class Reservation implements Serializable {
 
     public void setVoiture(Voiture voiture) {
         this.voiture = voiture;
+    }
+    public String getVoitureLibelle() {
+    	return this.voiture.getLibelle();
+    }
+    public String getClientNom() {
+    	return this.client.getNom()+" "+this.client.getPrenom();
+    }
+    public String getClientPhone() {
+    	return this.client.getNumberPhone();
+    }
+    public String getAgenceAdress() {
+    	return this.voiture.getAgence().getAdress();
+    }
+    public String getClientSexe() {
+    	return this.client.getGender();
     }
 
     public Reservation(Long id, Date dateReserv, String reference, User client, Voiture voiture) {

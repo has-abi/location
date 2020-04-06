@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.example.location.bean.Reservation;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long>{
-
+	Reservation findByReference(String reference);
 }

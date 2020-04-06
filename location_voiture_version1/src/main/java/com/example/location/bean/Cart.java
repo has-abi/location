@@ -1,12 +1,14 @@
 package com.example.location.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cart implements Serializable{
@@ -20,8 +22,8 @@ public class Cart implements Serializable{
 	private Long id;
 	@ManyToOne
 	private User client;
-	@ManyToOne
-	private Voiture voiture;
+	@OneToMany(mappedBy = "cart")
+	private List<CartItem> cartitems;
 	public Long getId() {
 		return id;
 	}
@@ -34,25 +36,17 @@ public class Cart implements Serializable{
 	public void setClient(User client) {
 		this.client = client;
 	}
-	public Voiture getVoiture() {
-		return voiture;
+	
+	public List<CartItem> getCartitems() {
+		return cartitems;
 	}
-	public void setVoiture(Voiture voiture) {
-		this.voiture = voiture;
+	public void setCartitems(List<CartItem> cartitems) {
+		this.cartitems = cartitems;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Cart(Long id, User client, Voiture voiture) {
-		super();
-		this.id = id;
-		this.client = client;
-		this.voiture = voiture;
-	}
-	public Cart() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

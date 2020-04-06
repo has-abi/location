@@ -57,6 +57,12 @@
 		<groupId>org.springframework.session</groupId>
 		<artifactId>spring-session-jdbc</artifactId>
 	</dependency>
+	<dependency>
+	<groupId>org.controlsfx</groupId>
+	<artifactId>controlsfx</artifactId>
+	<version>8.40.11</version>
+</dependency>
+	
 	</dependencies>
 	<build>
 		<plugins>

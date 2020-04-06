@@ -24,8 +24,7 @@ public class Agence implements Serializable {
     private Long id;
     @Column(length = 30)
     private String name;
-    @ManyToOne
-    private Address address;
+    private String adress;
 
     public Long getId() {
         return id;
@@ -43,21 +42,22 @@ public class Agence implements Serializable {
         this.name = name;
     }
 
-    public Address getAddress() {
-        return address;
-    }
+  
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
-    public Agence(Long id, String name, Address address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
+    public String getAdress() {
+		return adress;
+	}
 
-    public Agence() {
+	public void setAdress(String address) {
+		this.adress = address;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Agence() {
     }
     
     @Override
@@ -82,8 +82,15 @@ public class Agence implements Serializable {
 
     @Override
     public String toString() {
-        return "Agence{" + "id=" + id + ", name=" + name + ", address=" + address + '}';
+        return "Agence{" + "id=" + id + ", name=" + name + ", address=" + adress + '}';
     }
+
+	public Agence(Long id, String name, String address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.adress = address;
+	}
 
     
 

@@ -146,22 +146,19 @@ public class Voiture implements Serializable {
 		this.categorie = categorie;
 	}
 	
-	public String getMarqueBrand() {
+	public String getMarqueBrande() {
 		return this.marque.getBrand();
 	}
-	public String getCategorieName() {
+	public String getCategorieNom() {
 		return this.categorie.getName();
 	}
-	public Button getButtonDelete() {
-		 Button deleteV = new Button("delete");
-         deleteV.setStyle("-fx-background-color: transparent;-fx-text-fill:red");
-         return deleteV;
+	public String getAgenceName() {
+		return this.agence.getName();
 	}
-	public Button getButtonEdit() {
-		 Button editV = new Button("edit");
-        editV.setStyle("-fx-background-color: transparent;-fx-text-fill:blue");
-        return editV;
+	public String getAgenceAddress() {
+		return this.agence.getAdress();
 	}
+	
 	
 	@Override
     public boolean equals(Object object) {
@@ -175,13 +172,6 @@ public class Voiture implements Serializable {
         }
         return true;
     }
-
-
-	
-
-
-
-	
 
 	@Override
 	public String toString() {

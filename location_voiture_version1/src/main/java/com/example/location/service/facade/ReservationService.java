@@ -9,4 +9,5 @@ public interface ReservationService {
 	int modify(Reservation reservation);
 	int remove(Reservation reservation);
 	List<Reservation> findAll();
+	Reservation findByReference(String reference);
 }

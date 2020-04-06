@@ -2,6 +2,7 @@ package com.example.location.service.facade;
 
 import java.util.List;
 
+
 import com.example.location.bean.Voiture;
 
 public interface VoitureService {
@@ -10,4 +11,9 @@ public interface VoitureService {
 	int remove(Voiture voiture);
 	List<Voiture> findAllWithPagination(String action);
 	List<Voiture> findAll();
+	List<Voiture> findAllByMarqueBrand(String brand);
+	List<Voiture> findAllByAgenceAddress(String name);
+	List<Voiture> findAllByCategorieName(String name);
+	List<Voiture> findAllByColor(String color );
+	Voiture findById(Long id);
 }

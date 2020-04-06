@@ -10,10 +10,43 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="752.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.location.controller.DetailsController">
+<AnchorPane id="AnchorPane" prefHeight="511.0" prefWidth="752.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.location.controller.DetailsController">
    <children>
-      <Pane layoutX="24.0" layoutY="246.0" prefHeight="167.0" prefWidth="331.0" style="-fx-background-color: white; -fx-border-radius: 15px;" />
-      <Pane layoutX="383.0" prefHeight="466.0" prefWidth="369.0" style="-fx-background-color: white;">
+      <ImageView fx:id="voiture_image" fitHeight="183.0" fitWidth="315.0" layoutX="35.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+      <Pane layoutX="24.0" layoutY="227.0" prefHeight="223.0" prefWidth="331.0" style="-fx-background-color: white; -fx-border-radius: 15px;">
+         <children>
+            <Label fx:id="voiture_categorie" alignment="TOP_LEFT" layoutX="56.0" layoutY="14.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="voiture_nom" alignment="TOP_LEFT" layoutX="54.0" layoutY="74.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="voiture_couleur" alignment="TOP_LEFT" layoutX="54.0" layoutY="102.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="prix" layoutX="220.0" layoutY="184.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #00b9ff;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="voiture_description" alignment="TOP_LEFT" layoutX="54.0" layoutY="131.0" prefHeight="45.0" prefWidth="219.0" textFill="#4a4a4a">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="voiture_marque" alignment="TOP_LEFT" layoutX="56.0" layoutY="43.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
+               <font>
+                  <Font name="Georgia Bold" size="16.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="383.0" prefHeight="511.0" prefWidth="369.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="27.0" layoutY="124.0" text="Nom Et Le Prénom" textFill="#4a4646">
                <font>
@@ -50,45 +83,19 @@
                   <Font name="Georgia" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="42.0" layoutY="421.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #1c1c1c;" text="Reserver" textFill="WHITE" />
+            <Button layoutX="42.0" layoutY="421.0" mnemonicParsing="false" onAction="#handlReservation" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #1c1c1c;" text="Reserver" textFill="WHITE" />
+            <ImageView fitHeight="31.0" fitWidth="34.0" layoutX="324.0" layoutY="8.0" onMouseClicked="#hanldeClose" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@cancel.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="res_full_name" layoutX="175.0" layoutY="121.0" />
+            <TextField fx:id="res_email" layoutX="175.0" layoutY="169.0" />
+            <TextField fx:id="res_tele" layoutX="175.0" layoutY="208.0" />
+            <TextField fx:id="res_adress" layoutX="175.0" layoutY="246.0" />
+            <DatePicker fx:id="res_date" layoutX="175.0" layoutY="286.0" prefHeight="25.0" prefWidth="149.0" />
          </children>
       </Pane>
-      <ImageView fx:id="voiture_image" fitHeight="217.0" fitWidth="315.0" layoutX="35.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="voiture_nom" alignment="CENTER" layoutX="82.0" layoutY="246.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="voiture_marque" alignment="CENTER" layoutX="82.0" layoutY="271.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="voiture_categorie" alignment="CENTER" layoutX="82.0" layoutY="296.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="voiture_prix" alignment="CENTER" layoutX="82.0" layoutY="321.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="voiture_couleur" alignment="CENTER" layoutX="84.0" layoutY="346.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Label fx:id="voiture_description" alignment="CENTER" layoutX="84.0" layoutY="371.0" prefHeight="17.0" prefWidth="219.0" textFill="#4a4a4a">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
-      <Button fx:id="back" layoutX="14.0" layoutY="427.0" mnemonicParsing="false" onAction="#wel_back" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #ffe100;" text="back" textFill="WHITE" />
-      <TextField layoutX="555.0" layoutY="122.0" />
-      <TextField layoutX="555.0" layoutY="171.0" />
-      <TextField layoutX="555.0" layoutY="208.0" />
-      <TextField layoutX="555.0" layoutY="246.0" />
-      <DatePicker layoutX="555.0" layoutY="284.0" prefHeight="25.0" prefWidth="149.0" />
+      <Button fx:id="back" layoutX="12.0" layoutY="462.0" mnemonicParsing="false" onAction="#wel_back" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #ffe100;" text="Avant" textFill="WHITE" />
    </children>
 </AnchorPane>

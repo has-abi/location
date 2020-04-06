@@ -23,9 +23,9 @@
             <Image url="@icons8-lock-filled-50.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="68.0" fitWidth="191.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="136.0" layoutX="14.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@5278232-car-logo-png-free-transparent-png-logos-car-logo-png-448_157_preview.png" />
+            <Image url="@newnew.png" />
          </image>
       </ImageView>
       <Button layoutX="304.0" layoutY="352.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #ffe100;" text="S'inscrire" textFill="WHITE">
@@ -76,9 +76,9 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <ImageView depthTest="ENABLE" fitHeight="38.0" fitWidth="39.0" layoutX="625.0" layoutY="14.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="396.0" AnchorPane.leftAnchor="625.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="7.0">
+      <ImageView depthTest="ENABLE" fitHeight="33.0" fitWidth="38.0" layoutX="625.0" layoutY="12.0" mouseTransparent="true" onMouseClicked="#handleClose" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="403.0" AnchorPane.leftAnchor="625.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="12.0">
          <image>
-            <Image url="@unnamed.png" />
+            <Image url="@closeYY.png" />
          </image>
       </ImageView>
       <Label fx:id="success" alignment="CENTER" layoutX="224.0" layoutY="409.0" prefHeight="17.0" prefWidth="325.0" textFill="#40ff00" />
@@ -88,5 +88,10 @@
          </image>
       </ImageView>
       <PasswordField fx:id="pwd" layoutX="270.0" layoutY="197.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
+      <Label layoutX="36.0" layoutY="53.0" prefHeight="30.0" prefWidth="93.0" text="ACARS" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

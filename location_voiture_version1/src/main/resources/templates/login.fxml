@@ -11,19 +11,19 @@
 
 <AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="670.0" style="-fx-background-color: #1c1c1c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.location.controller.LoginController">
    <children>
-      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="439.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="442.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons8-administrator-male-52.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="439.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="29.0" fitWidth="28.0" layoutX="442.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@icons8-lock-filled-50.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="63.0" fitWidth="183.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="165.0" layoutX="262.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@5278232-car-logo-png-free-transparent-png-logos-car-logo-png-448_157_preview.png" />
+            <Image url="@newnew.png" />
          </image>
       </ImageView>
       <Label layoutX="316.0" layoutY="91.0" textFill="#c3c3c3">
@@ -38,36 +38,41 @@
       </Label>
       <Button layoutX="575.0" layoutY="347.0" mnemonicParsing="false" onAction="#loadRegisterView" style="-fx-background-color: transparent; -fx-border-color: #ffe100; -fx-border-radius: 5px;" text="S'inscrire" textFill="#ffe100">
          <font>
-            <Font size="15.0" />
+            <Font name="Georgia" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="280.0" layoutY="258.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #ffe100;" text="S'identifier" textFill="WHITE">
+      <Button layoutX="284.0" layoutY="305.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #ffe100;" text="S'identifier" textFill="WHITE">
          <font>
-            <Font size="15.0" />
+            <Font name="Georgia" size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="email" layoutX="253.0" layoutY="157.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
-      <Label layoutX="191.0" layoutY="157.0" prefHeight="27.0" prefWidth="44.0" text="Email" textFill="#c6c4c4">
+      <TextField fx:id="email" layoutX="257.0" layoutY="204.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
+      <Label layoutX="195.0" layoutY="204.0" prefHeight="27.0" prefWidth="54.0" text="Email" textFill="#c6c4c4">
          <font>
-            <Font size="18.0" />
+            <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="132.0" layoutY="210.0" prefHeight="27.0" prefWidth="118.0" text="Mot de passe" textFill="#c6c4c4">
+      <Label layoutX="136.0" layoutY="257.0" prefHeight="27.0" prefWidth="118.0" text="Mot de passe" textFill="#c6c4c4">
          <font>
-            <Font size="18.0" />
+            <Font name="Georgia" size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="pwd" layoutX="253.0" layoutY="211.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
-      <ImageView fitHeight="38.0" fitWidth="28.0" layoutX="632.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="632.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
+      <PasswordField fx:id="pwd" layoutX="257.0" layoutY="258.0" prefHeight="27.0" prefWidth="174.0" style="-fx-background-color: transparent; -fx-border-color: #ACABAB; -fx-border-radius: 7px; -fx-text-fill: #ACABAB;" />
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="628.0" layoutY="14.0" onMouseClicked="#handleClose" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="352.0" AnchorPane.leftAnchor="628.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <image>
-            <Image url="@unnamed.png" />
+            <Image url="@closeYY.png" />
          </image>
       </ImageView>
       <Label fx:id="warning" alignment="CENTER" layoutX="253.0" layoutY="324.0" prefHeight="17.0" prefWidth="195.0" textFill="RED" />
-      <ImageView fitHeight="63.0" fitWidth="66.0" layoutX="304.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="66.0" layoutX="308.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@user.png" />
          </image>
       </ImageView>
+      <Label layoutX="294.0" layoutY="63.0" prefHeight="30.0" prefWidth="93.0" text="ACARS" textFill="WHITE">
+         <font>
+            <Font name="Georgia Italic" size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

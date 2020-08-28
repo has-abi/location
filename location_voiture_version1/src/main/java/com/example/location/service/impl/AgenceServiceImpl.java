@@ -56,4 +56,9 @@ public class AgenceServiceImpl implements AgenceService{
 		return agenceRepository.findByName(name);
 	}
 
+	@Override
+	public Agence findByAdress(String adress) {
+		return agenceRepository.findByAdress(adress);
+	}
+
 }

@@ -7,5 +7,6 @@ import com.example.location.bean.Agence;
 @Repository
 public interface AgenceRepository extends JpaRepository<Agence, Long>{
 	Agence findByName(String name);
+	Agence findByAdress(String adress);
 	
 }

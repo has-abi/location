@@ -147,17 +147,11 @@ public class ModifierVoitureController implements Initializable{
 			this.voiture_couleur.setText(v.getColor());
 			this.voiture_description.setText(v.getDiscreption());
 			this.voiture_marque.setText(v.getMarqueBrande());
-			try {
-				this.voiture_image.setImage(new Image(new FileInputStream(
-							"C:\\Users\\21261\\git\\locationV\\location_voiture_version1\\src\\main\\resources\\storage\\"
-									+ v.getImage())));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+			this.voiture_image.setImage(new Image("/storage/"+ v.getImage()));
 			this.voiture_nom.setText(v.getLibelle());
 			this.voiture_prix.setText(Double.toString(v.getCoutParJour()));
 			//right side modify inputs
-			this.agenceService.findAll().forEach(agence->this.modif_agence.getItems().add(agence.getName()));
+			this.agenceService.findAll().forEach(agence->this.modif_agence.getItems().add(agence.getAdress()));
 			this.categorieService.findAll().forEach(categorie->this.modif_categorie.getItems().add(categorie.getName()));
 			this.marqueService.findAll().forEach(marque->this.modif_marque.getItems().add(marque.getBrand()));
 			this.modif_agence.getSelectionModel().select(v.getAgenceName());

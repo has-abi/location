@@ -337,10 +337,14 @@ public class AdminController implements Initializable {
 		voiture.setColor(this.color.getText());
 		voiture.setMarque(marqueService.findByBrand(this.marque.getSelectionModel().getSelectedItem()));
 		voiture.setCategorie(categorieService.findByName(this.categorie.getSelectionModel().getSelectedItem()));
+		voiture.setAgence(agenceServcie.findByAdress(this.agence.getSelectionModel().getSelectedItem()));
 		voiture.setCoutParJour(Double.parseDouble(this.price.getText()));
 		voiture.setDiscreption(this.desc.getText());
 		voiture.setImage(this.image);
-		voitureService.save(voiture);
+		if(voitureService.save(voiture) == 1) {
+			Notification.successNotification(this.car_name.getText()+" est ajouter avec sucée!");
+		}
+		
 	}
 
 	@FXML
@@ -379,7 +383,7 @@ public class AdminController implements Initializable {
 		table_couleur.setCellValueFactory(new PropertyValueFactory<Voiture, String>("color"));
 		table_marque.setCellValueFactory(new PropertyValueFactory<Voiture, String>("marqueBrande"));
 		table_categorie.setCellValueFactory(new PropertyValueFactory<Voiture, String>("categorieNom"));
-		table_agence.setCellValueFactory(new PropertyValueFactory<Voiture, String>("agenceName"));
+		table_agence.setCellValueFactory(new PropertyValueFactory<Voiture, String>("agenceAddress"));
 		table_id.setCellValueFactory(new PropertyValueFactory<Voiture, Long>("id"));
 		table_couleur.setCellValueFactory(new PropertyValueFactory<Voiture, String>("color"));
 		table_car.setItems(getVoitures());
@@ -541,6 +545,7 @@ public class AdminController implements Initializable {
 	void handlModify(ActionEvent event) {
 		Voiture voiture = this.table_car.getSelectionModel().getSelectedItem();
 		Session.SetSessionVoiture(voiture);
+		System.out.println(Session.getSessionVoiture("voiture"));
 		this.stageManager.switchScene(FxmlView.MODIFIERVOITURE);
 	}
 

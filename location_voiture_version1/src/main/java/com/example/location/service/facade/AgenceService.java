@@ -10,4 +10,5 @@ public interface AgenceService {
 	int remove(Agence agence);
 	List<Agence> findAll();
 	Agence findByName(String name);
+	Agence findByAdress(String adress);
 }

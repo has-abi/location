@@ -3,6 +3,7 @@ package com.example.location.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class VoitureServiceImpl implements VoitureService {
 	@Override
 	public List<Voiture> findAllWithPagination(String action) {
 		Pageable pageable;
-		pageable = PageRequest.of(0, 6);
+		pageable = PageRequest.of(0, 4);
 		if(action.equals("first")) {
 			return this.voitureRepository.findAll(pageable).getContent();
 		}else if(action.equals("next")) {
@@ -88,6 +89,16 @@ public class VoitureServiceImpl implements VoitureService {
 	@Override
 	public Voiture findById(Long id) {
 		return voitureRepository.findById(id).get();
+	}
+
+	@Override
+	public Page<Voiture> searchForVoitures(String cretiria,int page,int size) {
+		return voitureRepository.search(cretiria, PageRequest.of(page, size));
+	}
+
+	@Override
+	public List<String> findAllColors() {
+		return voitureRepository.findAllColors();
 	}
 
 	

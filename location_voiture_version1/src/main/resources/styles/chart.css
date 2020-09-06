@@ -1,0 +1,16 @@
+.chart {
+    -fx-padding: 10px;
+	-fx-width:500px;
+	-fx-height:400px;
+}
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+.chart-alternative-row-fill {
+    -fx-fill: transparent;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+.chart-content {
+    -fx-padding: 30px;    
+}

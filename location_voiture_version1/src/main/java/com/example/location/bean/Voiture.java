@@ -9,11 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import javafx.scene.control.Button;
-
-
-
-
 /**
  *
  * @author Abida Hassan

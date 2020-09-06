@@ -38,7 +38,7 @@
             </Label>
             <ImageView fitHeight="87.0" fitWidth="199.0" layoutX="299.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@5278232-car-logo-png-free-transparent-png-logos-car-logo-png-448_157_preview.png" />
+                  <Image url="@../icons/5278232-car-logo-png-free-transparent-png-logos-car-logo-png-448_157_preview.png" />
                </image>
             </ImageView>
             <Label layoutX="310.0" layoutY="60.0" text="Modifier Une Voiture" textFill="#4a4646">
@@ -80,7 +80,7 @@
             <Button layoutX="500.0" layoutY="237.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #1c1c1c;" text="image" textFill="WHITE" />
             <ImageView fitHeight="47.0" fitWidth="40.0" layoutX="622.0" layoutY="9.0" onMouseClicked="#handleClose" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@cancel.png" />
+                  <Image url="@../icons/cancel.png" />
                </image>
             </ImageView>
          </children>

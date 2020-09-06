@@ -61,10 +61,10 @@ public class ComposantUtil {
 			imageView.setLayoutY(layoutY);
 			imageView.setFitHeight(fitHeight);
 			imageView.setFitWidth(fitWidth);
-				imageView.setImage(new Image("/storage/"+image));
+				imageView.setImage(new Image(image));
 			
-			imageView.setPickOnBounds(true);
-			imageView.setPreserveRatio(true);
+			//imageView.setPickOnBounds(true);
+			//imageView.setPreserveRatio(true);
 			return imageView;
 		}
 		

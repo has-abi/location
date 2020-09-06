@@ -11,8 +11,11 @@ import com.example.location.bean.CartItem;
 import com.example.location.bean.User;
 import com.example.location.bean.Voiture;
 import com.example.location.config.StageManager;
+import com.example.location.service.facade.AgenceService;
 import com.example.location.service.facade.CartItemService;
 import com.example.location.service.facade.CartService;
+import com.example.location.service.facade.CategorieService;
+import com.example.location.service.facade.MarqueService;
 import com.example.location.service.facade.UserService;
 import com.example.location.service.facade.VoitureService;
 import com.example.location.util.ComposantUtil;
@@ -20,14 +23,16 @@ import com.example.location.util.Notification;
 import com.example.location.util.Session;
 import com.example.location.views.FxmlView;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,7 +40,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
 @Controller
 public class WelcomeController {
@@ -51,16 +55,20 @@ public class WelcomeController {
 	@Lazy
 	@Autowired
 	private UserService userService;
+	@Lazy
+	@Autowired
+	private CategorieService categorieService;
+	@Lazy
+	@Autowired
+	private MarqueService marqueService;
+	@Lazy
+	@Autowired
+	private AgenceService agenceService;
 	@FXML
 	private AnchorPane parent;
 	@FXML
 	private Pane home;
-	private Button ajouter;
-	private Button plus;
-	private ImageView image;
-	private Label car_name;
-	private Label car_price;
-	private Label car_location;
+
 	@Lazy
 	@Autowired
 	private VoitureService voitureService;
@@ -111,18 +119,32 @@ public class WelcomeController {
 	private ComboBox<String> user_gender;
 	@FXML
 	private Button enregistrer;
-	//side search
+	// side search
 	@FXML
-    private TextField filter_marque;
+	private TextField search_field;
 
-    @FXML
-    private TextField filter_categorie;
+	@FXML
+	private ImageView search_btn;
 
-    @FXML
-    private TextField filter_adress;
+	@FXML
+	private ComboBox<String> marque_chooser;
 
-    @FXML
-    private TextField filter_couleur;
+	@FXML
+	private ComboBox<String> categorie_chooser;
+
+	@FXML
+	private ComboBox<String> couleur_chooser;
+
+	@FXML
+	private TextField prix_max;
+
+	@FXML
+	private TextField prix_min;
+
+    
+
+	@FXML
+	private ComboBox<String> ville_chooser;
 	@FXML
 	private Pane home_pane;
 
@@ -144,6 +166,7 @@ public class WelcomeController {
 		this.user_gender.getSelectionModel().select(user.getGender());
 		desactiver();
 	}
+
 	public void desactiver() {
 		this.user_adress.setDisable(true);
 		this.user_email.setDisable(true);
@@ -169,7 +192,7 @@ public class WelcomeController {
 	@FXML
 	void UserUpdate(ActionEvent event) {
 		User user = new User();
-		
+
 		user.setAdress(this.user_adress.getText());
 		user.setEmail(this.user_email.getText());
 		user.setGender(this.user_gender.getSelectionModel().getSelectedItem());
@@ -177,9 +200,9 @@ public class WelcomeController {
 		user.setNom(this.user_nom.getText());
 		user.setPassword(this.user_password.getText());
 		user.setNumberPhone(this.user_phone.getText());
-		if(userService.modify(user) == 1) {
+		if (userService.modify(user) == 1) {
 			Notification.successNotification("votre profile est modifier avec succée!");
-		}else {
+		} else {
 			Notification.errorNotification("quelque chose incorrect!");
 		}
 	}
@@ -198,7 +221,8 @@ public class WelcomeController {
 	@FXML
 	void handleDeconnexion(ActionEvent event) {
 		Session.clear();
-		Notification.infoNotification("Vous avec déconnecté!");;
+		Notification.infoNotification("Vous avec déconnecté!");
+		;
 		this.stageManager.switchScene(FxmlView.LOGIN);
 	}
 
@@ -217,32 +241,46 @@ public class WelcomeController {
 
 	@FXML
 	public void initialize() {
+		this.search_btn.addEventFilter(MouseEvent.MOUSE_CLICKED, e->{
+			System.out.println("clicked");
+			if(this.search_field.getText() != "") {
+				this.home_pane.getChildren().clear();
+				chargerLesVoitures(voitureService.searchForVoitures(this.search_field.getText(), 0, 4).getContent());
+			}
+		});
+		initChoosers();
 		this.voiture_counter.setText(Integer.toString(
 				cartItemService.countByCart(cartService.findByUserId(Session.getSessionUser("user").getId()))));
 		this.listVoitures = voitureService.findAllWithPagination("first");
-		this.next = new Button("Après");
-		this.next.setLayoutX(502);
-		this.next.setLayoutY(522);
-		this.next.setPrefHeight(27);
-		this.next.setPrefWidth(141);
-		this.next.setStyle("-fx-background-color: transparent;-fx-text-fill:#545353");
+		this.next = new Button(">");
+		this.next.setLayoutX(983);
+		this.next.setLayoutY(518);
+		this.next.setPrefHeight(31);
+		this.next.setPrefWidth(27);
+		this.next.setStyle("-fx-background-color: black;-fx-font-size:16px;-fx-text-fill:white;-fx-font-weight:bold");
 		this.home.getChildren().add(this.next);
-		this.prev = new Button("Avant");
-		this.prev.setStyle("-fx-background-color: transparent;-fx-text-fill:#545353");
-		this.prev.setLayoutX(14);
-		this.prev.setLayoutY(450);
-		this.prev.setPrefHeight(27);
-		this.prev.setPrefWidth(141);
+		this.prev = new Button("<");
+		this.prev.setStyle("-fx-background-color: black;-fx-font-size:16px;-fx-text-fill:white;-fx-font-weight:bold");
+		this.prev.setLayoutX(947);
+		this.prev.setLayoutY(518);
+		this.prev.setPrefHeight(31);
+		this.prev.setPrefWidth(27);
 		this.next.addEventHandler(ActionEvent.ACTION, e -> {
 			this.home_pane.getChildren().clear();
 			chargerLesVoitures(voitureService.findAllWithPagination("next"));
-			this.home_pane.getChildren().add(this.prev);
+			this.home.getChildren().add(this.prev);
 		});
 		this.prev.addEventHandler(ActionEvent.ACTION, e -> {
 			this.home_pane.getChildren().clear();
 			chargerLesVoitures(voitureService.findAllWithPagination("prev"));
 		});
 		chargerLesVoitures(this.listVoitures);
+		// NumberAxis xAxis = new NumberAxis();
+		// xAxis.setLabel("Names");
+		// NumberAxis yAxis = new NumberAxis();
+		// yAxis.setLabel("values");
+
+		// this.home_pane.getChildren().add(lineChart);
 	}
 
 	public void chargerLesVoitures(List<Voiture> voitures) {
@@ -251,66 +289,64 @@ public class WelcomeController {
 		int counter = 0;
 
 		for (Voiture voiture : voitures) {
-			if (counter > 0 && counter % 3 == 0) {
-				addy += 220;
+			if (counter > 0 && counter % 2 == 0) {
+				addy += 246;
 				addx = 0;
 			}
-			car_name = new Label();
-			car_price = new Label();
-			car_location = new Label();
-			this.image = new ImageView();
-			this.image.setFitHeight(95.0);
-			this.image.setFitWidth(141.0);
-			this.image.setLayoutX(13.0 + addx);
-			this.image.setLayoutY(10.0 + addy);
-			this.image.setPickOnBounds(true);
-			this.image.setPreserveRatio(true);
-			this.image.setImage(new Image("/storage/" + voiture.getImage()));
-			this.car_name.setLayoutX(25 + addx);
-			this.car_name.setLayoutY(110 + addy);
-			this.car_name.setPrefHeight(17);
-			this.car_name.setPrefWidth(127);
-			this.car_name.setText(voiture.getLibelle());
-			this.car_name.setStyle("-fx-text-fill:black");
-			this.car_price.setLayoutX(25 + addx);
-			this.car_name.setAlignment(Pos.CENTER);
-			this.car_price.setLayoutY(130 + addy);
-			this.car_price.setPrefHeight(17);
-			this.car_price.setPrefWidth(127);
-			this.car_price.setAlignment(Pos.CENTER);
-			this.car_price.setStyle("-fx-text-fill:black");
-			this.car_price.setText(Double.toString(voiture.getCoutParJour())+" DH");
-			
-			this.car_location.setLayoutX(25 + addx);
-			this.car_location.setLayoutY(150.0 + addy);
-			this.car_location.setPrefHeight(17);
-			this.car_location.setPrefWidth(127);
-			this.car_location.setAlignment(Pos.CENTER);
-			this.car_location.setText(voiture.getAgence().getAdress());
-			this.car_location.setStyle("-fx-text-fill:black");
-			System.out.println(voiture);
-			
-			this.ajouter = new Button("ajouter");
-			this.ajouter.setStyle("-fx-background-color:#42f560;-fx-text-fill:white");
-			this.ajouter.setLayoutX(90.0 + addx);
-			this.ajouter.setLayoutY(180.0 + addy);
-			this.ajouter.setPrefHeight(25.0);
-			this.ajouter.setPrefWidth(65.0);
-			this.ajouter.setMnemonicParsing(false);
 
-			this.plus = new Button("plus");
-			this.plus.setStyle("-fx-background-color:#0158FC;-fx-text-fill:white");
-			this.plus.setLayoutX(16.0 + addx);
-			this.plus.setLayoutY(180.0 + addy);
-			this.plus.setPrefHeight(25.0);
-			this.plus.setPrefWidth(65.0);
-			this.plus.setMnemonicParsing(false);
-			this.plus.addEventHandler(ActionEvent.ACTION, e -> {
+			Label car_price;
+			ImageView overflow;
+			Button ajouter;
+			Button plus;
+			ImageView image;
+
+			overflow = new ImageView();
+			overflow.setFitHeight(50.0);
+			overflow.setFitWidth(389.0);
+			overflow.setLayoutX(14.0 + addx);
+			overflow.setLayoutY(197.0 + addy);
+			overflow.setImage(new Image("/icons/overflow.png"));
+
+			car_price = new Label(Double.toString(voiture.getCoutParJour()) + " DH");
+			car_price.setStyle("-fx-text-fill:white;-fx-font-weight:bold;-fx-font-size:24px");
+			car_price.setPrefHeight(41.0);
+			car_price.setPrefWidth(127.0);
+			car_price.setLayoutX(121.0 + addx);
+			car_price.setLayoutY(205.0 + addy);
+
+			image = new ImageView();
+			image.setFitHeight(233.0);
+			image.setFitWidth(389.0);
+			image.setLayoutX(14.0 + addx);
+			image.setLayoutY(14.0 + addy);
+			image.setStyle("-fx-effect: dropshadow(three-pass-box, #e3e6e4, 10, 0, 0, 5)");
+			// image.setPickOnBounds(true);
+//			image.setPreserveRatio(true);
+			image.setImage(new Image("/storage/" + voiture.getImage()));
+
+			ajouter = new Button(null, GlyphsDude.createIcon(FontAwesomeIcon.SHOPPING_CART, "16px"));
+			ajouter.setLayoutX(364.0 + addx);
+			ajouter.setLayoutY(20.0 + addy);
+
+			// this.ajouter.setMnemonicParsing(false);
+			ajouter.setStyle("-fx-background-color: white;");
+			ajouter.setCursor(Cursor.HAND);
+
+			plus = new Button(null, GlyphsDude.createIcon(FontAwesomeIcon.BARS, "16px"));
+			plus.setLayoutX(364.0 + addx);
+			plus.setLayoutY(70.0 + addy);
+
+			// this.plus.setMnemonicParsing(false);
+			plus.setStyle("-fx-background-color: white");
+			plus.setCursor(Cursor.HAND);
+			plus.addEventHandler(ActionEvent.ACTION, e -> {
+				System.out.println("plus");
 				Session.SetSessionVoiture(voiture);
 				this.stageManager.switchScene(FxmlView.MORE);
 
 			});
-			this.ajouter.addEventHandler(ActionEvent.ACTION, e -> {
+			ajouter.addEventHandler(ActionEvent.ACTION, e -> {
+				System.out.println("ajouter");
 				Cart cart = new Cart();
 				CartItem ci = new CartItem();
 				cart.setClient(Session.getSessionUser("user"));
@@ -321,9 +357,9 @@ public class WelcomeController {
 				this.voiture_counter.setText(Integer.toString(Integer.parseInt(this.voiture_counter.getText()) + 1));
 
 			});
-			this.home_pane.getChildren().addAll(ajouter, plus, image, car_name, car_price,car_location);
-			
-			addx += 160;
+			this.home_pane.getChildren().addAll(image, overflow, car_price, ajouter, plus);
+
+			addx += 425;
 			counter++;
 
 		}
@@ -332,9 +368,9 @@ public class WelcomeController {
 	private List<CartItem> cartitems;
 
 	public void chargerUserCart() {
-		Button next = ComposantUtil.createButton(557, 36, ">", "-fx-text-fill:white;-fx-background-color: #1c1c1c;");
-		Button prev = ComposantUtil.createButton(100, 36, "<", "-fx-text-fill:white;-fx-background-color: #1c1c1c;");
-		Label pasV = ComposantUtil.createLabel(233, 233, "Pas De Voiture ! retourner en arrière", "");
+		Button next = ComposantUtil.createButton(674, 36, ">", "-fx-text-fill:white;-fx-background-color: #1c1c1c;");
+		Button prev = ComposantUtil.createButton(341, 36, "<", "-fx-text-fill:white;-fx-background-color: #1c1c1c;");
+		Label pasV = ComposantUtil.createLabel(333, 233, "Pas De Voiture ! retourner en arrière", "");
 		next.addEventHandler(ActionEvent.ACTION, e -> {
 			this.cartitems = cartItemService
 					.findAllByCart(cartService.findByUserId(Session.getSessionUser("user").getId()), "next");
@@ -363,23 +399,49 @@ public class WelcomeController {
 		int y = 0;
 		for (CartItem cartitem : cartItems) {
 			Voiture voiture = cartitem.getVoiture();
-			ImageView imageView = ComposantUtil.createImageView(49, 10 + y, 150, 200, voiture.getImage());
-			Label libelle = ComposantUtil.createLabel(54, 16, voiture.getLibelle(), "-fx-text-fill:white");
-			Label marque = ComposantUtil.createLabel(54, 96, voiture.getMarqueBrande(), "-fx-text-fill:white");
-			Label categorie = ComposantUtil.createLabel(54, 36, voiture.getCategorieNom(), "-fx-text-fill:white");
-			Label agence = ComposantUtil.createLabel(54, 56, voiture.getAgenceName(), "-fx-text-fill:white");
-			Label prix = ComposantUtil.createLabel(153, 110,
-					"Prix : " + Double.toString(voiture.getCoutParJour()) + " DH", "-fx-text-fill:white");
-			Label couleur = ComposantUtil.createLabel(54, 76, voiture.getColor(), "-fx-text-fill:white");
-			Text descreption = ComposantUtil.createText(143, 80, voiture.getDiscreption(), 108, "-fx-text-fill:white");
-			Button reserver = ComposantUtil.createButton(261, 31, "Reserver",
-					"-fx-background-color: #26acff;-fx-text-fill:white");
-			Button suprimer = ComposantUtil.createButton(261, 78, "Suprimer",
-					"-fx-background-color: #ffad07;-fx-text-fill:white");
-			Pane pane = ComposantUtil.createPane(253, 10 + y, 132.5, 357, "-fx-background-color: #1c1c1c;");
-			pane.getChildren().addAll(libelle, marque, categorie, agence, prix, couleur, descreption, reserver,
+			ImageView imageView = ComposantUtil.createImageView(14, 13, 137, 200, "/storage/" + voiture.getImage());
+
+			ImageView pngImage = ComposantUtil.createImageView(450, -5, 167, 200, "/icons/prix.png");
+
+			Label libelle = GlyphsDude.createIconLabel(FontAwesomeIcon.CAR, voiture.getLibelle(), "24px", "24px",
+					ContentDisplay.LEFT);
+			libelle.setLayoutX(255);
+			libelle.setLayoutY(21);
+
+			// Label marque = ComposantUtil.createLabel(54, 96, voiture.getMarqueBrande(),
+			// "-fx-text-fill:white");
+
+			Label categorie = GlyphsDude.createIconLabel(FontAwesomeIcon.DASHBOARD, voiture.getCategorieNom(), "20px",
+					"20px", ContentDisplay.LEFT);
+			categorie.setLayoutX(225);
+			categorie.setLayoutY(56);
+
+			Label agence = GlyphsDude.createIconLabel(FontAwesomeIcon.LOCATION_ARROW, voiture.getAgenceAddress(),
+					"22px", "22px", ContentDisplay.LEFT);
+			agence.setLayoutX(225);
+			agence.setLayoutY(86);
+
+			Label prix = ComposantUtil.createLabel(490, 54, Double.toString(voiture.getCoutParJour()) + " DH",
+					"-fx-font-size:29px;-fx-font-family:Bell MT;-fx-text-fill:#ffcb00");
+			Label parJour = ComposantUtil.createLabel(571, 102, "Par Jour", "-fx-font-size:15px;-fx-text-fill:white");
+			// Label couleur = ComposantUtil.createLabel(54, 76, voiture.getColor(),
+			// "-fx-text-fill:white");
+			// Text descreption = ComposantUtil.createText(143, 80,
+			// voiture.getDiscreption(), 108, "-fx-text-fill:white");
+			Button reserver = ComposantUtil.createButton(325, 123, "Réserver", "-fx-background-color:  #ffcb00");
+
+			Button details = ComposantUtil.createButton(246, 123, "Détails",
+					"-fx-background-color: #212121;-fx-text-fill: #ffcb00");
+			details.setCursor(Cursor.HAND);
+			Button suprimer = ComposantUtil.createButton(601, 13, "X",
+					"-fx-background-color: transparent;-fx-text-fill:white;-fx-font-size:23px");
+			reserver.setCursor(Cursor.HAND);
+			suprimer.setCursor(Cursor.HAND);
+			Pane pane = ComposantUtil.createPane(196, 39 + y, 158, 648,
+					"-fx-border-width: 2px;-fx-border-color: #212121");
+			pane.getChildren().addAll(imageView, libelle, categorie, agence, pngImage, parJour, prix, details, reserver,
 					suprimer);
-			this.cartPane.getChildren().addAll(imageView, pane);
+			this.cartPane.getChildren().addAll(pane);
 			reserver.addEventHandler(ActionEvent.ACTION, e -> {
 				Session.SetSessionVoiture(voiture);
 				this.stageManager.switchScene(FxmlView.MORE);
@@ -394,55 +456,54 @@ public class WelcomeController {
 							.setText(Integer.toString(Integer.parseInt(this.voiture_counter.getText()) - 1));
 				}
 			});
-			y += 163;
+			y += 217;
 		}
 	}
-	private List<Voiture> searchVs;
-	  @FXML
-	    void handelSearch(ActionEvent event) {
-		  if(this.searchVs!=null) {
-			  this.searchVs.clear();
-		  }
-		  	if(!this.filter_adress.getText().isEmpty() && this.filter_adress.getText()!="") {
-		  		this.searchVs = voitureService.findAllByAgenceAddress(this.filter_adress.getText());
-		  	}
-		  	if(!this.filter_categorie.getText().isEmpty() && this.filter_categorie.getText()!="") {
-		  		if(this.searchVs !=null) {
-		  			this.searchVs.addAll(voitureService.findAllByCategorieName(this.filter_categorie.getText()));
-		  		}else{
-		  			this.searchVs = voitureService.findAllByCategorieName(this.filter_categorie.getText());
-		  		}
-		  	}
-		  	if(!this.filter_couleur.getText().isEmpty() && this.filter_couleur.getText()!=null) {
-		  		if(this.searchVs !=null) {
-		  			System.out.println("here1");
-		  			this.searchVs.addAll(voitureService.findAllByColor(this.filter_couleur.getText()));
-		  		}else {
-		  			System.out.println("here2");
-		  			this.searchVs = voitureService.findAllByColor(this.filter_couleur.getText());
-		  			System.out.println(this.searchVs.size());
-		  		}
-		  		
-		  	}
-		  	if(!this.filter_marque.getText().isEmpty() && this.filter_marque.getText()!="") {
-		  		if(this.searchVs!=null) {
-		  			this.searchVs.addAll(voitureService.findAllByMarqueBrand(this.filter_marque.getText()));	
-		  		}else {
-		  			this.searchVs = voitureService.findAllByMarqueBrand(this.filter_marque.getText());
-		  		}
-		  		
-		  	}if(this.searchVs != null) {
-		  		this.searchVs.forEach(v->System.out.println(v));
-		  		this.home_pane.getChildren().clear();
-		  		chargerLesVoitures(this.searchVs);
-		  	}
-		  	
-		 
-	    }
-	   @FXML
-	    void reset(ActionEvent event) {
-		   this.home_pane.getChildren().clear();
-		   initialize();
-	    }
 
+	private List<Voiture> searchVs;
+
+	// search method
+	@FXML
+	void handelSearch(ActionEvent event) {
+		if (this.searchVs != null) {
+			this.searchVs.clear();
+		}
+
+		if (this.searchVs != null) {
+			this.home_pane.getChildren().clear();
+			chargerLesVoitures(this.searchVs);
+		}
+
+	}
+
+//reset serch fields method
+	@FXML
+	void reset(ActionEvent event) {
+		this.home_pane.getChildren().clear();
+		initialize();
+	}
+
+	public void initChoosers() {
+		// setup color chooser
+				this.couleur_chooser.getItems().add("-SELECT-");
+				this.voitureService.findAllColors().forEach(c -> this.couleur_chooser.getItems().add(c));
+				this.couleur_chooser.getSelectionModel().selectFirst();
+
+				// setup categorie chooser
+				this.categorie_chooser.getItems().add("-SELECT-");
+				this.categorieService.findAll().forEach(c->this.categorie_chooser.getItems().add(c.getName()));
+				this.categorie_chooser.getSelectionModel().selectFirst();
+				
+				//setup marque chooser
+				this.marque_chooser.getItems().add("-SELECT-");
+				this.marqueService.findAll().forEach(m->this.marque_chooser.getItems().add(m.getBrand()));
+				this.marque_chooser.getSelectionModel().selectFirst();
+				
+				//setup villes 
+				this.ville_chooser.getItems().add("-SELECT-");
+				this.agenceService.findAll().forEach(a->this.ville_chooser.getItems().add(a.getAdress()));
+				this.ville_chooser.getSelectionModel().selectFirst();
+	}
+	
+	
 }

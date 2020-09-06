@@ -3,9 +3,10 @@ package com.example.location.controller;
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import com.example.location.service.facade.MarqueService;
 import com.example.location.service.facade.ReservationService;
 import com.example.location.service.facade.UserService;
 import com.example.location.service.facade.VoitureService;
+import com.example.location.util.AppCharts;
 import com.example.location.util.FileUtil;
 import com.example.location.util.HandMessages;
 import com.example.location.util.Notification;
@@ -46,6 +48,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -62,7 +65,7 @@ public class AdminController implements Initializable {
 	@Autowired
 	@Lazy
 	private ReservationService reservationService;
-	
+
 	@FXML
 	private Label user_location;
 	@FXML
@@ -142,28 +145,28 @@ public class AdminController implements Initializable {
 	private TableView<Reservation> table_reservation;
 
 	@FXML
-	private TableColumn<Reservation,Long> reservation_id;
+	private TableColumn<Reservation, Long> reservation_id;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_ref;
+	private TableColumn<Reservation, String> reservation_ref;
 
 	@FXML
-	private TableColumn<Reservation,Date> reservation_date;
+	private TableColumn<Reservation, Date> reservation_date;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_client;
+	private TableColumn<Reservation, String> reservation_client;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_phone;
+	private TableColumn<Reservation, String> reservation_phone;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_sexe;
+	private TableColumn<Reservation, String> reservation_sexe;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_voiture;
+	private TableColumn<Reservation, String> reservation_voiture;
 
 	@FXML
-	private TableColumn<Reservation,String> reservation_agence;
+	private TableColumn<Reservation, String> reservation_agence;
 	@FXML
 	private Pane autres;
 	@FXML
@@ -185,13 +188,13 @@ public class AdminController implements Initializable {
 	private TextField categorie_places;
 
 	@FXML
-	private TableColumn<Agence,Long> ag_id;
+	private TableColumn<Agence, Long> ag_id;
 
 	@FXML
-	private TableColumn<Agence,String> ag_nom;
+	private TableColumn<Agence, String> ag_nom;
 
 	@FXML
-	private TableColumn<Agence,String> ag_adress;
+	private TableColumn<Agence, String> ag_adress;
 	@FXML
 	private Pane addCar;
 
@@ -226,53 +229,79 @@ public class AdminController implements Initializable {
 
 	@FXML
 	private Label uplodedImage;
+	@FXML
+	private Pane bar_chart_container;
+
+	@FXML
+	private Pane pie_chart_container;
+
+	@FXML
+	private Pane area_chart_container;
+
+	@FXML
+	private Pane line_chart_container;
+
+	@FXML
+	private Button next_btn;
+
+	@FXML
+	private Button prev_btn;
+
+	@FXML
+	private Pane statis_pane;
+
+	@FXML
+	private ImageView close_btn;
 	private String image;
+
 	@Lazy
 	@Autowired
 	private VoitureService voitureService;
+
 	@Lazy
 	@Autowired
 	private AgenceService agenceServcie;
 
 	@FXML
 	void ajouterAgence(ActionEvent event) {
-		if(!this.ag_nom.getText().isEmpty() && !this.ag_adress.getText().isEmpty()) {
+		if (!this.ag_nom.getText().isEmpty() && !this.ag_adress.getText().isEmpty()) {
 			Agence ag = new Agence();
 			ag.setName(this.ag_nom.getText());
 			ag.setAdress(this.ag_adress.getText());
-			if(agenceServcie.save(ag) == 1) {
-				Notification.successNotification("agence "+this.ag_nom.getText()+" ajouté avec succée!");
+			if (agenceServcie.save(ag) == 1) {
+				Notification.successNotification("agence" + this.ag_nom.getText() + " ajouté avec succée!");
 			}
-		}else {
+		} else {
 			Notification.warningNotification("remplir tout les champs!");
 		}
-		
+
 	}
 
 	@FXML
 	void ajouterCategorie(ActionEvent event) {
-		if(!this.categorie_nom.getText().isEmpty() && !this.categorie_places.getText().isEmpty() &&  !this.categorie_portes.getText().isEmpty()) {
+		if (!this.categorie_nom.getText().isEmpty() && !this.categorie_places.getText().isEmpty()
+				&& !this.categorie_portes.getText().isEmpty()) {
 			Categorie c = new Categorie();
 			c.setName(this.categorie_nom.getText());
 			c.setNbrePlaces(Integer.parseInt(this.categorie_places.getText()));
 			c.setNbrePortes(Integer.parseInt(this.categorie_portes.getText()));
-			if(categorieService.save(c) == 1) {
-				Notification.successNotification("Catégorie "+this.categorie_nom.getText()+" ajouté avec succée!");
+			if (categorieService.save(c) == 1) {
+				Notification.successNotification("Catégorie " + this.categorie_nom.getText() + " ajouté avec succée!");
 			}
-		}else {
+		} else {
 			Notification.warningNotification("remplir tout les champs!");
 		}
 	}
 
 	@FXML
 	void ajouterMarque(ActionEvent event) {
-		if(!this.marque_nom.getText().isEmpty()) {
+		if (!this.marque_nom.getText().isEmpty()) {
 			Marque m = new Marque();
 			m.setBrand(this.marque_nom.getText());
-			if(marqueService.save(m) == 1) {
-				Notification.successNotification("la marque "+this.marque_nom.getText()+" ajouté avec succée!");
+			if (marqueService.save(m) == 1) {
+				Notification.successNotification("la marque " + this.marque_nom.getText() + " ajouté avec succée!");
 			}
-		}else {
+		} else {
 			Notification.warningNotification("remplir tout les champs!");
 		}
 	}
@@ -299,6 +328,7 @@ public class AdminController implements Initializable {
 		reservation_voiture.setCellValueFactory(new PropertyValueFactory<Reservation, String>("voitureLibelle"));
 		this.table_reservation.setItems(getReservations());
 	}
+
 	@FXML
 	void searchReservation(ActionEvent event) {
 		FilteredList<Reservation> filteredData = new FilteredList<Reservation>(getReservations(), v -> true);
@@ -329,6 +359,7 @@ public class AdminController implements Initializable {
 		sortedData.comparatorProperty().bind(table_reservation.comparatorProperty());
 		table_reservation.setItems(sortedData);
 	}
+
 	@FXML
 	void handleAdd(ActionEvent event) {
 		Voiture voiture = new Voiture();
@@ -341,10 +372,53 @@ public class AdminController implements Initializable {
 		voiture.setCoutParJour(Double.parseDouble(this.price.getText()));
 		voiture.setDiscreption(this.desc.getText());
 		voiture.setImage(this.image);
-		if(voitureService.save(voiture) == 1) {
-			Notification.successNotification(this.car_name.getText()+" est ajouter avec sucée!");
+		if (voitureService.save(voiture) == 1) {
+			Notification.successNotification(this.car_name.getText() + " est ajouter avec sucée!");
 		}
-		
+	}
+
+	@FXML
+	void handleStatis(ActionEvent event) {
+		Map<Integer, Pane> panes = new HashMap<Integer, Pane>();
+		panes.put(1, bar_chart_container);
+		panes.put(2, pie_chart_container);
+
+		this.next_btn.addEventHandler(ActionEvent.ACTION, e -> {
+			if (this.statis_pane.getChildren().get(0) == panes.get(2)) {
+				this.statis_pane.getChildren().setAll(panes.get(1), this.next_btn, this.prev_btn,this.close_btn);
+			} else {
+				this.statis_pane.getChildren().setAll(
+						panes.get(getIndexOfPane((Pane) this.statis_pane.getChildren().get(0), panes) + 1),
+						this.next_btn, this.prev_btn,this.close_btn);
+			}
+		});
+
+		this.prev_btn.addEventHandler(ActionEvent.ACTION, e -> {
+			if (this.statis_pane.getChildren().get(0) == panes.get(1)) {
+				this.statis_pane.getChildren().setAll(panes.get(2), this.next_btn, this.prev_btn,this.close_btn);
+			} else {
+				this.statis_pane.getChildren().setAll(
+						panes.get(getIndexOfPane((Pane) this.statis_pane.getChildren().get(0), panes) - 1),
+						this.next_btn, this.prev_btn,this.close_btn);
+			}
+		});
+		this.bar_chart_container.getChildren().add(AppCharts.buildBarChart(reservationService.getListVoiture()));
+		this.pie_chart_container.getChildren().add(AppCharts.buildPieChart(reservationService.getListMarques()));
+		//this.area_chart_container.getChildren().add(AppCharts.buildAreaChart());
+		//this.line_chart_container.getChildren().add(AppCharts.buildLineChart());
+		this.statis_pane.getChildren().setAll(panes.get(1), this.next_btn, this.prev_btn,this.close_btn);
+		this.parent.getChildren().setAll(this.statis_pane);
+	}
+
+	public int getIndexOfPane(Pane pane, Map<Integer, Pane> panes) {
+		int index = 1;
+		for (Map.Entry<Integer, Pane> entry : panes.entrySet()) {
+			if (entry.getValue() == pane)
+				return index;
+			else
+				index++;
+		}
+		return index;
 	}
 
 	@FXML
@@ -363,8 +437,6 @@ public class AdminController implements Initializable {
 	void handleHome(ActionEvent event) {
 		this.parent.getChildren().setAll(this.home);
 	}
-
-	
 
 	@FXML
 	void handleDeconnexion(ActionEvent event) {
@@ -398,16 +470,16 @@ public class AdminController implements Initializable {
 		ObservableList<User> users = FXCollections.observableArrayList(userService.findAll());
 		return users;
 	}
+
 	private ObservableList<Agence> getAgences() {
 		ObservableList<Agence> agences = FXCollections.observableArrayList(agenceServcie.findAll());
 		return agences;
 	}
-	
+
 	private ObservableList<Reservation> getReservations() {
 		ObservableList<Reservation> reser = FXCollections.observableArrayList(reservationService.findAll());
 		return reser;
 	}
-	
 
 	@FXML
 	void handleSearchUsers(ActionEvent event) {
@@ -489,7 +561,7 @@ public class AdminController implements Initializable {
 		marqueService.findAll().forEach(marque -> this.marque.getItems().add(marque.getBrand()));
 		this.marque.getSelectionModel().select(0);
 		this.marque.setVisibleRowCount(6);
-		agenceServcie.findAll().forEach(agence->this.agence.getItems().add(agence.getAdress()));
+		agenceServcie.findAll().forEach(agence -> this.agence.getItems().add(agence.getAdress()));
 		this.agence.setVisibleRowCount(6);
 		this.agence.getSelectionModel().select(0);
 	}
@@ -561,5 +633,7 @@ public class AdminController implements Initializable {
 		}
 
 	}
+
+	
 
 }
